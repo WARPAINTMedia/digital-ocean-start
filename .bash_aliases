@@ -198,3 +198,44 @@ function sql-import() {
     mysql -u $USER -p -h localhost $DATABASE < $FILE
 }
 
+# git aliases
+# tj git aliases
+alias gd="git diff | vim"
+alias ga="git add"
+alias gaa="git add --all ."
+alias gbd="git branch -D"
+alias gs="git status"
+alias gca="git commit -a -m"
+alias gm="git merge --no-ff"
+alias gpt="git push --tags"
+alias gp="git push"
+alias grh="git reset --hard"
+alias gb="git branch"
+alias gcob="git checkout -b"
+alias gco="git checkout"
+alias gba="git branch -a"
+alias gcp="git cherry-pick"
+alias gl="git log --pretty='format:%Cgreen%h%Creset %an - %s' --graph"
+alias gpom="git pull origin master"
+alias gcd='cd "`git rev-parse --show-toplevel`"'
+
+# my aliases
+# remove files that are not under version control
+alias gcf="git clean -fd"
+# discard changes in the working directory
+alias gcod="git checkout -- ."
+# grab the latest upstream version
+alias gpum="git pull upstream master"
+# delete branch from github. follow with branch name
+alias gpod="git push origin --delete"
+# show git status without untracked files
+alias gsu="git status -uno"
+# commit -m
+alias gcm="git commit -m"
+# remove staged file
+alias grm="git reset HEAD"
+
+# generate a changelog based on the content of the commit messages
+function changelog() {
+  git log --pretty=format:"%ar %s" | > changelog.md && echo "created changelog.md"
+}
