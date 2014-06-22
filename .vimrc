@@ -50,6 +50,23 @@ set history=700
 filetype plugin on
 filetype indent on
 
+" " VUNDLE if you cloned it
+" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" remove the filetype settings from the above lines
+" set nocompatible
+" filetype off
+"
+" set rtp+=~/.vim/bundle/Vundle.vim
+" call vundle#begin()
+"
+" " the vundle plugins
+" Plugin 'gmarik/Vundle.vim'
+"
+" Plugin 'jelera/vim-javascript-syntax'
+"
+" call vundle#end()
+" filetype plugin indent on
+
 " Set to auto read when a file is changed from the outside
 set autoread
 
