@@ -239,3 +239,7 @@ alias grm="git reset HEAD"
 function changelog() {
   git log --pretty=format:"%ar %s" | > changelog.md && echo "created changelog.md"
 }
+
+gitrdone () {
+  git commit -m $1 && git push
+}
