@@ -134,6 +134,9 @@ set lazyredraw
 " For regular expressions turn magic on
 set magic
 
+" Smoother terminal connection
+set ttyfast
+
 " Show matching brackets when text indicator is over them
 set showmatch
 " How many tenths of a second to blink when matching brackets
@@ -147,7 +150,11 @@ set tm=500
 
 " Add a bit extra margin to the left
 set foldcolumn=0
-
+" Split current window below
+set splitbelow
+" Split current window right
+set splitright
+set title
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -156,8 +163,7 @@ set foldcolumn=0
 syntax enable
 
 colorscheme default
-
-" set background=dark
+set background=dark
 
 " Set extra options when running in GUI mode
 if has("gui_running")
