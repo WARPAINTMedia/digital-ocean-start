@@ -258,3 +258,12 @@ filesize () {
 		du $arg .[^.]* *
 	fi
 }
+
+function create-site-conf() {
+    OLD="example.com"
+    echo "Enter the name of the new site:"
+    read SITENAME
+    cat ~/.vhost.conf > "$SITENAME.conf"
+    sed "s/$OLD/$SITENAME/g" "$SITENAME.conf"
+    echo "created $SITENAME.conf"
+}
