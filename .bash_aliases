@@ -176,7 +176,7 @@ unset bash_prompt
 alias check-gzip="curl -I -H 'Accept-Encoding: gzip,deflate'"
 
 function enable-site() {
-    sudo a2ensite "$1" && service apache2 reload
+    sudo a2ensite "$1" && echo "\nServer Restart:\n" && service apache2 reload
 }
 
 alias htdocs="cd /var/www/html/"
