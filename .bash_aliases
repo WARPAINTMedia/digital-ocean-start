@@ -244,6 +244,23 @@ gitrdone () {
   git commit -m $1 && git push
 }
 
+git-purge() {
+  FN="git rm --cached --ignore-unmatch $1"
+  git filter-branch --force --index-filter $FN --prune-empty --tag-name-filter cat -- --all
+  echo "\n run git push -f in order to overwrite the remote files you purged."
+}
+
+# clone a remote branch without any other branches
+git-get-tree() {
+  REPO=$1
+  NAME=$2
+  BRANCH=$3
+  # git-get-tree Swipe kimwz touch-swipe-improve
+  git remote add -t $BRANCH -f $NAME "https://github.com/$NAME/$REPO/"
+  git checkout -b $BRANCH
+  git pull $NAME
+}
+
 filesize () {
 	if du -b /dev/null > /dev/null 2>&1
 	then
