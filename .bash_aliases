@@ -284,3 +284,24 @@ function create-site-conf() {
     sed "s/$OLD/$SITENAME/g" "$SITENAME.conf"
     echo "created $SITENAME.conf"
 }
+
+# create a new git enabled project
+function new-project() {
+  #where are we starting from?
+  LOCATION="$(pwd)"
+  # get the sitename
+  SITENAME="$1"
+  # setup the directories
+  mkdir /var/www/html/$SITENAME # && cd /var/www/html/$SITENAME
+  mkdir /var/www/git/$SITENAME.git && cd /var/www/git/$SITENAME.git
+  git init --bare && cd hooks
+  # create post-receive file and own it
+  echo "git --work-tree=/var/www/html/$SITENAME --git-dir=/var/www/git/$SITENAME.git checkout -f" > post-receive
+  chmod +x post-receive
+  # go back to where we started
+  cd $LOCATION
+  # get the IP for this server
+  IP="$(curl -sS http://myip.dnsomatic.com)"
+  # tell us how to clone this repo, we assume the username is the default `root`
+  echo "git remote add dev ssh://root@$IP:/var/www/git/$SITENAME.git"
+}
