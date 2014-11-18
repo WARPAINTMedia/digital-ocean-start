@@ -234,6 +234,8 @@ alias gsu="git status -uno"
 alias gcm="git commit -m"
 # remove staged file
 alias grm="git reset HEAD"
+# add current files, commit those files
+alias gacm="git add . --all && git commit -m"
 
 # generate a changelog based on the content of the commit messages
 function changelog() {
