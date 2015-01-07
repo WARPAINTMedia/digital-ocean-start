@@ -64,7 +64,7 @@ function extract()      # Handy Extract Program
     *.tgz)       tar xvzf $1     ;;
     *.zip)       unzip $1        ;;
     *.Z)         uncompress $1   ;;
-    *.7z)        7z x $1         ;;
+    *.7z)        p7zip x $1         ;;
     *)           echo "'$1' cannot be extracted via >extract<" ;;
     esac
     else
@@ -185,10 +185,10 @@ alias apache-sites="cd /etc/apache2/sites-available"
 alias apache-errors="cat /var/log/apache2/error.log"
 
 # take in a table name and then dump the backup file
-# you must have 7zip installed for this to work
+# you must have p7zip installed for this to work
 function sql-dump() {
     mysqldump -u root -p $1 > "$1_backup.sql"
-    7zip "$1_backup.sql"
+    p7zip "$1_backup.sql"
 }
 
 function sql-import() {
