@@ -187,8 +187,10 @@ alias apache-errors="cat /var/log/apache2/error.log"
 # take in a table name and then dump the backup file
 # you must have p7zip installed for this to work
 function sql-dump() {
-    mysqldump -u root -p $1 > "$1_backup.sql"
-    p7zip "$1_backup.sql"
+    FILE="$1_backup.sql"
+    mysqldump -u root -p $1 > $FILE
+    echo "$FILE created"
+    p7zip "$FILE"
 }
 
 function sql-import() {
