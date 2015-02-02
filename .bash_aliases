@@ -296,8 +296,8 @@ function new-project() {
   # get the sitename
   SITENAME="$1"
   # setup the directories
-  mkdir /var/www/html/$SITENAME # && cd /var/www/html/$SITENAME
-  mkdir /var/www/git/$SITENAME.git && cd /var/www/git/$SITENAME.git
+  mkdir -p /var/www/html/$SITENAME # && cd /var/www/html/$SITENAME
+  mkdir -p /var/www/git/$SITENAME.git && cd /var/www/git/$SITENAME.git
   git init --bare && cd hooks
   # create post-receive file and own it
   echo "git --work-tree=/var/www/html/$SITENAME --git-dir=/var/www/git/$SITENAME.git checkout -f" > post-receive
