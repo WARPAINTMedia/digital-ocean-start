@@ -309,3 +309,7 @@ function new-project() {
   # tell us how to clone this repo, we assume the username is the default `root`
   echo "git remote add dev ssh://root@$IP:/var/www/git/$SITENAME.git"
 }
+
+function apache-setup() {
+  a2enmod rewrite expires mime headers deflate filter
+}
