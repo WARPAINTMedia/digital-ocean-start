@@ -177,8 +177,8 @@ set title
 " Enable syntax highlighting
 syntax enable
 
-colorscheme default
 set background=dark
+colorscheme Tomorrow-Night-Eighties
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -497,5 +497,9 @@ function! DoReindent()
     call setpos('.', save_cursor)
     call setreg('/', old_query)
 endfunction
+
+" this is important for a bunch of stuff
+set omnifunc=syntaxcomplete#Complete
+inoremap <tab> <c-r>=Smart_TabComplete()<CR>
 
 noremap <leader>r :call DoReindent()<CR>
