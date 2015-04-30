@@ -70,6 +70,14 @@ filetype indent on
 " Set to auto read when a file is changed from the outside
 set autoread
 
+" This tells Vim to automatically change the global current working directory
+" to the directory of
+" the file currently being edited.
+set autochdir
+
+" only load up +/- 128 lines
+syntax sync minlines=128
+
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
 let mapleader = ","
@@ -88,6 +96,13 @@ command W w !sudo tee % > /dev/null
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=3
+
+" Respect modeline in files
+set modeline
+set modelines=4
+
+" Highlight current line
+set cursorline
 
 " Turn on the WiLd menu
 set wildmenu
@@ -174,7 +189,7 @@ if has("gui_running")
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
+set encoding=utf8 nobomb
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
@@ -201,15 +216,25 @@ set smarttab
 " 1 tab == 2 spaces
 set shiftwidth=2
 set tabstop=2
+set softtabstop=2
+set shiftround
 
 " Linebreak on 500 characters
 set lbr
 set tw=500
 
+" better indents
+set autoindent
+set smartindent
+
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
+" Tabs and extra whitespace are evil, so let's highlight them with some fun characters.
+exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
+set list
+set listchars-=nbsp:¬,eol:¶,tab:>-,extends:»,precedes:«,trail
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
