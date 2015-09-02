@@ -313,3 +313,5 @@ function new-project() {
 function apache-setup() {
   a2enmod rewrite expires mime headers deflate filter
 }
+
+alias composer="php /usr/bin/composer.phar"
