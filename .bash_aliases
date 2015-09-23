@@ -319,4 +319,11 @@ function proftpd-password() {
   /bin/echo "{md5}"`/bin/echo -n "$1" | openssl dgst -binary -md5 | openssl enc -b    ase64`                                                                            
 }
 
+# download composer and install it globally
+function get-composer() {
+  curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin
+  echo "composer installed and alias created"
+}
+
+# make `composer` work by itself
 alias composer="php /usr/bin/composer.phar"
