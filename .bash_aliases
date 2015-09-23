@@ -311,7 +311,12 @@ function new-project() {
 }
 
 function apache-setup() {
-  a2enmod rewrite expires mime headers deflate filter
+  a2enmod rewrite expires mime headers deflate filter file_cache cache cache_disk cache_socache mime setenvif
+}
+
+# generats a password for the proftpd mysql database
+function proftpd-password() {
+  /bin/echo "{md5}"`/bin/echo -n "$1" | openssl dgst -binary -md5 | openssl enc -b    ase64`                                                                            
 }
 
 alias composer="php /usr/bin/composer.phar"
