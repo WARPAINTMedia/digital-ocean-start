@@ -201,6 +201,10 @@ function sql-import() {
     mysql -u $USER -p -h localhost $DATABASE < $FILE
 }
 
+function full-mysql-dump() {
+    mysqldump --all-databases > dump-$( date '+%Y-%m-%d_%H-%M-%S' ).sql -u root -p
+}
+
 # git aliases
 # tj git aliases
 alias gd="git diff | vim"
