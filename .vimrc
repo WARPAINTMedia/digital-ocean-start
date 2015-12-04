@@ -374,8 +374,11 @@ map <leader>p :cp<cr>
 " => Spell checking
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Pressing ,ss will toggle and untoggle spell checking
-map <leader>ss :setlocal spell!<cr>
-
+map <leader>sc :setlocal spell!<cr>
+" Enable spellchecking for Markdown
+autocmd FileType markdown setlocal spell
+" Autocomplete with dictionary words when spell check is on
+set complete+=kspell
 " Shortcuts using <leader>
 map <leader>sn ]s
 map <leader>sp [s
