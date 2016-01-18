@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 
-DB_DB="default"
-DB_PW="BDNmPU9KF1Uv"
+DB_DB=""
+DB_PW=""
+
+if [[ -z "$DB_DB" ]]; then
+  echo "Please set a default DB name"
+  exit 0
+fi
+
+if [[ -z "$DB_PW" ]]; then
+  echo "Please set a default DB password"
+  exit 0
+fi
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -220,6 +230,9 @@ apt-get install -y blackfire-agent blackfire-php
 # Install A Few Other Things
 
 apt-get install -y redis-server memcached beanstalkd
+sed -i 's/tcp-keepalive\ 0/tcp-keepalive\ 60/g' /etc/redis/redis.conf
+sed -i 's/# maxmemory <bytes>/maxmemory 12mb/g' /etc/redis/redis.conf
+sed -i 's/# maxmemory-policy volatile-lru/maxmemory-policy allkeys-lru/g' /etc/redis/redis.conf
 
 # Configure Beanstalkd
 
