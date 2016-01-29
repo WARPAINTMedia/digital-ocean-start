@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 DB_DB=""
+DB_USER=""
 DB_PW=""
 
 if [[ -z "$DB_DB" ]]; then
@@ -197,19 +198,19 @@ echo "default_password_lifetime = 0" >> /etc/mysql/my.cnf
 
 # sed -i '/^bind-address/s/bind-address.*=.*/bind-address = 0.0.0.0/' /etc/mysql/my.cnf
 
-mysql --user="root" --password="$DB_PW" -e "GRANT ALL ON *.* TO root@'0.0.0.0' IDENTIFIED BY '$DB_PW' WITH GRANT OPTION;"
+mysql --user="$DB_USER" --password="$DB_PW" -e "GRANT ALL ON *.* TO $DB_USER@'0.0.0.0' IDENTIFIED BY '$DB_PW' WITH GRANT OPTION;"
 service mysql restart
 
-mysql --user="root" --password="$DB_PW" -e "CREATE USER '$DB_DB'@'0.0.0.0' IDENTIFIED BY '$DB_PW';"
-mysql --user="root" --password="$DB_PW" -e "GRANT ALL ON *.* TO '$DB_DB'@'0.0.0.0' IDENTIFIED BY '$DB_PW' WITH GRANT OPTION;"
-mysql --user="root" --password="$DB_PW" -e "GRANT ALL ON *.* TO '$DB_DB'@'%' IDENTIFIED BY '$DB_PW' WITH GRANT OPTION;"
-mysql --user="root" --password="$DB_PW" -e "FLUSH PRIVILEGES;"
-mysql --user="root" --password="$DB_PW" -e "CREATE DATABASE $DB_DB;"
+mysql --user="$DB_USER" --password="$DB_PW" -e "CREATE USER '$DB_DB'@'0.0.0.0' IDENTIFIED BY '$DB_PW';"
+mysql --user="$DB_USER" --password="$DB_PW" -e "GRANT ALL ON *.* TO '$DB_DB'@'0.0.0.0' IDENTIFIED BY '$DB_PW' WITH GRANT OPTION;"
+mysql --user="$DB_USER" --password="$DB_PW" -e "GRANT ALL ON *.* TO '$DB_DB'@'%' IDENTIFIED BY '$DB_PW' WITH GRANT OPTION;"
+mysql --user="$DB_USER" --password="$DB_PW" -e "FLUSH PRIVILEGES;"
+mysql --user="$DB_USER" --password="$DB_PW" -e "CREATE DATABASE $DB_DB;"
 service mysql restart
 
 # Add Timezone Support To MySQL
 
-mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql --user=root --password=$DB_PW mysql
+mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql --user=$DB_USER --password=$DB_PW mysql
 
 # Install Postgres
 
