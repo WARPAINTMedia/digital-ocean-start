@@ -201,16 +201,13 @@ echo "default_password_lifetime = 0" >> /etc/mysql/my.cnf
 
 # Configure MySQL Remote Access
 
-# sed -i '/^bind-address/s/bind-address.*=.*/bind-address = 0.0.0.0/' /etc/mysql/my.cnf
+# sed -i '/^bind-address/s/bind-address.*=.*/bind-address = localhost/' /etc/mysql/my.cnf
 
-mysql --user="$DB_USER" --password="$DB_PW" -e "GRANT ALL ON *.* TO $DB_USER@'0.0.0.0' IDENTIFIED BY '$DB_PW' WITH GRANT OPTION;"
-service mysql restart
+mysql -e "CREATE DATABASE $DB_DB;"
 
-mysql --user="$DB_USER" --password="$DB_PW" -e "CREATE USER '$DB_DB'@'0.0.0.0' IDENTIFIED BY '$DB_PW';"
-mysql --user="$DB_USER" --password="$DB_PW" -e "GRANT ALL ON *.* TO '$DB_DB'@'0.0.0.0' IDENTIFIED BY '$DB_PW' WITH GRANT OPTION;"
-mysql --user="$DB_USER" --password="$DB_PW" -e "GRANT ALL ON *.* TO '$DB_DB'@'%' IDENTIFIED BY '$DB_PW' WITH GRANT OPTION;"
-mysql --user="$DB_USER" --password="$DB_PW" -e "FLUSH PRIVILEGES;"
-mysql --user="$DB_USER" --password="$DB_PW" -e "CREATE DATABASE $DB_DB;"
+mysql -e "CREATE USER $DB_USER@localhost IDENTIFIED BY $DB_PW;"
+mysql -e "GRANT ALL ON $DB_DB.* TO $DB_USER@localhost IDENTIFIED BY $DB_PW WITH GRANT OPTION;"
+mysql -e "FLUSH PRIVILEGES;"
 service mysql restart
 
 # Add Timezone Support To MySQL
