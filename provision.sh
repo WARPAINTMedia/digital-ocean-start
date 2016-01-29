@@ -205,8 +205,8 @@ echo "default_password_lifetime = 0" >> /etc/mysql/my.cnf
 
 mysql -e "CREATE DATABASE $DB_DB;"
 
-mysql -e "CREATE USER $DB_USER@localhost IDENTIFIED BY $DB_PW;"
-mysql -e "GRANT ALL ON $DB_DB.* TO $DB_USER@localhost IDENTIFIED BY $DB_PW WITH GRANT OPTION;"
+mysql -e "CREATE USER $DB_USER@localhost IDENTIFIED BY \"$DB_PW\";"
+mysql -e "GRANT ALL ON $DB_DB.* TO $DB_USER@localhost IDENTIFIED BY \"$DB_PW\" WITH GRANT OPTION;"
 mysql -e "FLUSH PRIVILEGES;"
 service mysql restart
 
