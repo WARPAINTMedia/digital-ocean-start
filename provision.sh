@@ -9,6 +9,11 @@ if [[ -z "$DB_DB" ]]; then
   exit 0
 fi
 
+if [[ -z "$DB_USER" ]]; then
+  echo "Please set a default DB username"
+  exit 0
+fi
+
 if [[ -z "$DB_PW" ]]; then
   echo "Please set a default DB password"
   exit 0
