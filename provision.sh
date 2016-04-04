@@ -38,8 +38,9 @@ locale-gen en_US.UTF-8
 apt-get install -y software-properties-common curl
 
 apt-add-repository ppa:nginx/development -y
-apt-add-repository ppa:rwky/redis -y
-apt-add-repository ppa:ondrej/php-7.0 -y
+apt-add-repository ppa:chris-lea/redis-server -y
+apt-add-repository ppa:ondrej/php -y
+
 apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
 add-apt-repository 'deb [arch=amd64,i386] http://mariadb.mirror.anstey.ca/repo/10.1/ubuntu trusty main' -y
 
@@ -238,6 +239,7 @@ apt-get install -y blackfire-agent blackfire-php
 # Install A Few Other Things
 
 apt-get install -y redis-server memcached beanstalkd
+
 sed -i 's/tcp-keepalive\ 0/tcp-keepalive\ 60/g' /etc/redis/redis.conf
 sed -i 's/# maxmemory <bytes>/maxmemory 12mb/g' /etc/redis/redis.conf
 sed -i 's/# maxmemory-policy volatile-lru/maxmemory-policy allkeys-lru/g' /etc/redis/redis.conf
