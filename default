@@ -1,0 +1,71 @@
+# Default server configuration
+#
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	# root /var/www/html;
+	root "/var/www/html/stride/public";
+
+	# Add index.php to the list if you are using PHP
+	index index.html index.htm index.php;
+
+	# server_name _;
+	# server_name ~^(.*)\.strideapp\.io$ ;
+	server_name strideapp.io www.strideapp.io divatiming.strideapp.io;
+
+	charset utf-8;
+
+	location / {
+		try_files $uri $uri/ /index.php?$query_string;
+	}
+
+	location ~ \.php$ {
+		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+		fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+		fastcgi_index index.php;
+		include fastcgi_params;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+
+		fastcgi_intercept_errors off;
+		fastcgi_buffer_size 16k;
+		fastcgi_buffers 4 16k;
+		fastcgi_connect_timeout 300;
+		fastcgi_send_timeout 300;
+		fastcgi_read_timeout 300;
+	}
+
+	# deny access to .htaccess files, if Apache's document root
+	# concurs with nginx's one
+	
+	location ~ /\.ht {
+		deny all;
+	}
+}
+
+server{
+  listen 80;
+  server_name demo.strideapp.io;
+  # Add index.php to the list if you are using PHP
+  index index.html index.htm index.php;
+  root "/var/www/html/demo-stride";
+
+	location / {
+		try_files $uri $uri/ /index.php?$query_string;
+	}
+
+	location ~ \.php$ {
+		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+		fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+		fastcgi_index index.php;
+		include fastcgi_params;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+
+		fastcgi_intercept_errors off;
+		fastcgi_buffer_size 16k;
+		fastcgi_buffers 4 16k;
+		fastcgi_connect_timeout 300;
+		fastcgi_send_timeout 300;
+		fastcgi_read_timeout 300;
+	}
+}
