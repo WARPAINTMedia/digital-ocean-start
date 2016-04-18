@@ -43,6 +43,7 @@ server {
 	}
 }
 
+# flat file sites
 server{
   listen 80;
   server_name demo.strideapp.io;
